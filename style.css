@@ -1,0 +1,76 @@
+body {
+    margin: 0px;
+    font-family: arial, sans-serif;
+}
+#header {
+    height: 44px;
+    border-bottom: 1px solid #ebebeb;
+    padding-left: 16px;
+    line-height: 40px;
+}
+#header-buttons {
+    position: absolute;
+    left: 252px;
+    top: 0px;
+}
+#sidebar {
+    float: left;
+    width: 236px;
+    padding-top: 16px;
+}
+#sidebar ul {
+    list-style-type: none;
+    margin: 0px;
+    padding: 0px;
+}
+#sidebar a {
+    text-decoration: none;
+    font-size: 11pt;
+    color: #333;
+    display: block;
+    padding: 2px;
+    padding-left: 16px;
+}
+#sidebar a:hover {
+    background-color: #eee;
+    color: black;
+}
+#content {
+    overflow-y: auto;
+    position: absolute;
+    left: 252px;
+    bottom: 0px;
+    top: 60px;
+    right: 0px;
+}
+a.post-title {
+    color: #15c;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+#logo {
+    text-decoration: none;
+    font-family: arial, sans-serif;
+    font-size: 20px;
+    color: rgb(221, 75, 57);
+}
+
+div.post {
+    border: 1px solid #ebebeb;
+    padding: 5px;
+    margin-bottom: 5px;
+    margin-right: 5px;
+    box-shadow: rgb(227, 229, 235) 0px 0px 4px 0px;
+}
+a.button {
+    padding: 8px;
+    border: 1px solid #dcdcdc;
+    border-radius: 2px;
+    background-color: #f5f5f5;
+    text-decoration: none;
+    color: #444;
+    font-weight: bold;
+    font-size: 11px;
+}
