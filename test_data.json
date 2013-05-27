@@ -1,0 +1,5 @@
+{"posts": [
+    {"title": "Parsed from JSON", "content": "This was parsed from JSON."},
+    {"title": "NetBSD 6.1 released", "content": "\"The NetBSD Project is pleased to announce NetBSD 6.1, the first feature update of the NetBSD 6 release branch. It represents a selected subset of fixes deemed important for security or stability reasons, as well as new features and enhancements. Please note that all fixes in the prior security/bugfix updates (NetBSD 6.0.1 and 6.0.2) are also in 6.1.\""},
+    {"title": "NixOS", "content": "\"In NixOS, the entire operating system - the kernel, applications, system packages, configuration files, and so on - is built by the Nix package manager from a description in a purely functional build language. The fact that its purely functional essentially means that building a new configuration cannot overwrite previous configurations. Most of the other features follow from this.\" Interesting approach. A Linux distribution, sure, but with some very refreshing ideas about system configuration."}
+]}
