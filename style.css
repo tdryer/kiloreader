@@ -30,10 +30,14 @@ body {
     display: block;
     padding: 2px;
     padding-left: 16px;
+    border-left: 3px solid #ffffff;
+}
+#sidebar a.selected-true {
+    color: #d14836;
+    border-left: 3px solid #dd4b39;
 }
 #sidebar a:hover {
     background-color: #eee;
-    color: black;
 }
 #content {
     overflow-y: auto;

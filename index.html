@@ -17,7 +17,9 @@
         <div id="sidebar">
             <ul>
                 <li ng-repeat="(id, feed) in feeds">
-                    <a href="" ng-click="select_feed(id)">{{feed}}</a>
+                    <a href="" ng-click="select_feed(id)" class="selected-{{id == selected_feed}}">
+                        {{feed}}
+                    </a>
                 </li>
             </ul>
         </div>

@@ -24,8 +24,11 @@ function MyController($scope, $http) {
 
     $scope.posts = [];
 
+    $scope.selected_feed = 1;
+
     $scope.select_feed = function(feed_id) {
         console.log("Selected feed: " + $scope.feeds[feed_id]);
+        $scope.selected_feed = feed_id;
     };
 
     $scope.add_post = function(i, post) {
