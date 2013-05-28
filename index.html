@@ -1,14 +1,14 @@
-<html>
+<html ng-app="scroll" ng-controller="MyController">
     <head>
-        <title>Reader</title>
+        <title>{{title}}</title>
         <link rel="stylesheet" type="text/css" href="style.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
-        <script src="jquery-infinitescroll/jquery.infinitescroll.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.7/angular.min.js"></script>
         <script src="script.js"></script>
     </head>
     <body>
         <div id="header">
-            <a id="logo" href="#">Logo</a>
+            <a id="logo" href="">{{title}}</a>
             <div id="header-buttons">
                 <a class="button" href="#">Refresh</a>
                 <a class="button" href="#">Settings</a>
@@ -16,12 +16,15 @@
         </div>
         <div id="sidebar">
             <ul>
+                <li ng-repeat="(id, feed) in feeds">
+                    <a href="" ng-click="select_feed(id)">{{feed}}</a>
+                </li>
             </ul>
         </div>
-        <div id="content">
-            <div class="post">
-                <a class="post-title" href="#">This is a test.</a>
-                <p>This is some post content.</p>
+        <div id="content" when-scrolled="add_more_posts()">
+            <div class="post" ng-repeat="post in posts">
+                <a class="post-title" href="">{{post["title"]}}</a>
+                <p>{{post["content"]}}</p>
             </div>
         </div>
     </body>
