@@ -16,25 +16,32 @@ angular.module('scroll', []).directive('whenScrolled', function() {
 function MyController($scope, $http) {
     $scope.title = "TReader";
 
-    $scope.feeds = {
-        1: "The Verge",
-        2: "XKCD",
-        3: "Planet Ubuntu",
-    };
+    $scope.feeds = {};
 
     $scope.posts = [];
 
-    $scope.selected_feed = 1;
+    $scope.selected_feed = -1;
 
     $scope.select_feed = function(feed_id) {
-        console.log("Selected feed: " + $scope.feeds[feed_id]);
-        $scope.selected_feed = feed_id;
+        if (feed_id !== $scope.selected_feed) {
+            console.log("Selected feed: " + $scope.feeds[feed_id].title);
+            $scope.selected_feed = feed_id;
+        }
     };
 
     $scope.add_post = function(i, post) {
         console.log("Added post " + post["title"]);
         $scope.posts.push(post);
     };
+
+    $scope.load_subscriptions = function() {
+        $http.get("subscriptions.json").success(function (data, status) {
+            $scope.feeds = data;
+            $scope.select_feed("1");
+        });
+    }
+
+    $scope.load_subscriptions();
 
     $scope.add_more_posts = function() {
         console.log('At the end of the page. Loading more!');
