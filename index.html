@@ -26,6 +26,7 @@
         <div id="content" when-scrolled="load_entries()">
             <div class="entry" ng-repeat="entry in entries">
                 <a class="entry-title" href="">{{entry["title"]}}</a>
+                <p class="entry-source">from <a href="" class="entry-source" ng-click="select_feed(entry.feed_id)">{{feeds[entry.feed_id].title}}</a></p>
                 <p>{{entry["content"]}}</p>
             </div>
         </div>

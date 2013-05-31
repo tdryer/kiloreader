@@ -68,6 +68,18 @@ div.entry {
     margin-right: 5px;
     box-shadow: rgb(227, 229, 235) 0px 0px 4px 0px;
 }
+
+p.entry-source {
+    margin: 0px;
+    color: rgb(102, 102, 102);
+    font-size: 13px;
+}
+
+a.entry-source {
+    color: rgb(17, 85, 204);
+    text-decoration: none;
+}
+
 a.button {
     padding: 8px;
     border: 1px solid #dcdcdc;
