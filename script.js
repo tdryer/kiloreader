@@ -18,7 +18,7 @@ function MyController($scope, $http) {
 
     $scope.feeds = {};
 
-    $scope.posts = [];
+    $scope.entries = [];
 
     $scope.selected_feed = -1;
 
@@ -26,30 +26,34 @@ function MyController($scope, $http) {
         if (feed_id !== $scope.selected_feed) {
             console.log("Selected feed: " + $scope.feeds[feed_id].title);
             $scope.selected_feed = feed_id;
+            $scope.entries = [];
+            $scope.load_entries();
         }
     };
 
-    $scope.add_post = function(i, post) {
-        console.log("Added post " + post["title"]);
-        $scope.posts.push(post);
-    };
+    $scope.load_entries = function() {
+        var endpoint = "test_api/feeds/" + $scope.selected_feed + "/entries.json";
+        if ($scope.entries.length > 0) {
+            var last_entry_id = $scope.entries[$scope.entries.length - 1].id;
+            endpoint += "?after=" + last_entry_id;
+        }
+        $http.get(endpoint).success(function (data, status) {
+            $scope.entries = $scope.entries.concat(data);
+        });
+    }
+
+    $scope.load_more_entries = function() {
+        var last_entry_id = $scope.entries
+
+    }
 
     $scope.load_subscriptions = function() {
-        $http.get("subscriptions.json").success(function (data, status) {
+        $http.get("test_api/subscriptions.json").success(function (data, status) {
             $scope.feeds = data;
             $scope.select_feed("1");
         });
     }
 
     $scope.load_subscriptions();
-
-    $scope.add_more_posts = function() {
-        console.log('At the end of the page. Loading more!');
-        $http.get("test_data.json").success(function (data, status) {
-            $.each(data["posts"], $scope.add_post);
-        });
-    };
-
-    $scope.add_more_posts();
 }
 

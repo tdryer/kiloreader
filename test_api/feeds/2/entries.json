@@ -1,0 +1,14 @@
+[
+    {
+        "id": 1,
+        "feed_id": 2,
+        "title": "First entry in feed no2",
+        "content": "This is the content of the post."
+    },
+    {
+        "id": 2,
+        "feed_id": 2,
+        "title": "Second entry in feed no2",
+        "content": "This is the content of the second post."
+    }
+]
