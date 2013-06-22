@@ -69,6 +69,10 @@ div.entry {
     box-shadow: rgb(227, 229, 235) 0px 0px 4px 0px;
 }
 
+div.entry-selected-true {
+    border-left-color: rgb(77, 144, 240);
+}
+
 p.entry-source {
     margin: 0px;
     color: rgb(102, 102, 102);
