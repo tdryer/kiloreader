@@ -94,3 +94,16 @@ a.button {
     font-weight: bold;
     font-size: 11px;
 }
+
+a.feed-title {
+    display: block;
+    font-size: 14px;
+    font-weight: bold;
+    color: rgb(68, 68, 68);
+    text-decoration: none;
+    margin-bottom: 6px;
+    padding-bottom: 10px;
+    border-bottom-color: rgb(235, 235, 235);
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+}

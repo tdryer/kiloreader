@@ -1,7 +1,7 @@
 {
-    "1": {"title": "The Verge"},
-    "2": {"title": "XKCD"},
-    "3": {"title": "Planet Ubuntu"},
-    "4": {"title": "OSNews"},
-    "5": {"title": "AnandTech"}
+    "1": {"title": "The Verge", "url": "http://theverge.com"},
+    "2": {"title": "XKCD", "url": "http://xkcd.com"},
+    "3": {"title": "Planet Ubuntu", "url": "http://theverge.com"},
+    "4": {"title": "OSNews", "url": "http://theverge.com"},
+    "5": {"title": "AnandTech", "url": "http://theverge.com"}
 }
