@@ -24,7 +24,7 @@
             </ul>
         </div>
         <div id="content" when-scrolled="load_entries()" on-scroll-current="foo()">
-            <a href="{{feeds[selected_feed].url}}" class="feed-title">{{feeds[selected_feed].title}} &raquo;</a>
+            <a href="{{feeds[selected_feed].url}}" class="feed-title" target="_blank">{{feeds[selected_feed].title}} &raquo;</a>
             <div class="entry entry-selected-{{$index == selected_entry}}" ng-repeat="entry in entries">
                 <div class="entry-main">
                     <a class="entry-title" href="">{{entry["title"]}}</a>
