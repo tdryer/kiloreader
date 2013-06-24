@@ -16,11 +16,14 @@
         </div>
         <div id="sidebar">
             <a href="" class="subscribe-button">Subscribe</a>
-            <ul>
-                <li ng-repeat="(id, feed) in feeds">
-                    <a href="" ng-click="select_feed(id)" class="selected-{{id == selected_feed}}">
+            <ul class="feed-list">
+                <li ng-repeat="(id, feed) in feeds" ng-click="select_feed(id)">
+                    <div class="feed-item-main feed-item-selected-{{id == selected_feed}}">
                         {{feed.title}}
-                    </a>
+                    </div>
+                    <div class="feed-item-context" ng-click="alert('foo'); $event.stopImmediatePropagation()">
+                        <div class="down-arrow"></div>
+                    </div>
                 </li>
             </ul>
         </div>

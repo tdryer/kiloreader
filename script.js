@@ -86,6 +86,10 @@ function MyController($scope, $http) {
         });
     }
 
+    $scope.alert = function(text) {
+        alert(text);
+    }
+
     $scope.load_subscriptions();
 }
 
