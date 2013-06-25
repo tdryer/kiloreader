@@ -2,16 +2,24 @@ var module = angular.module('scroll', [])
 
 module.directive('whenScrolled', function() {
     return function(scope, elm, attr) {
-        var raw = elm[0];
         // TODO: stop when there's no more content
-        // TODO: make sure enough content has loaded for initial scroll bar to appear
+        var raw = elm[0];
+        var reachedBottom = function() {
+            return raw.scrollTop + raw.offsetHeight >= raw.scrollHeight;
+        };
         var checkScroll = function() {
-            if (raw.scrollTop + raw.offsetHeight >= raw.scrollHeight) {
-                scope.$apply(attr.whenScrolled);
+            if (reachedBottom()) {
+                if(!scope.$$phase) {
+                    scope.$apply(attr.whenScrolled);
+                } else {
+                    scope.$eval(attr.whenScrolled);
+                }
             }
-        }
-        elm.bind('scroll', checkScroll);
-        $(window).bind('resize', checkScroll);
+        };
+        // Poll and load more entries if necessary. This is better than binding
+        // the scroll event, becuase if loading one set of entries isn't enough
+        // to fill the screen, we can keep loading more.
+        setInterval(checkScroll, 0);
     };
 });
 
