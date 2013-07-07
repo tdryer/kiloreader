@@ -72,7 +72,7 @@ function MyController($scope, $http) {
     };
 
     $scope.load_entries = function() {
-        var endpoint = "test_api/feeds/" + $scope.selected_feed + "/entries.json";
+        var endpoint = "api/feed/" + $scope.selected_feed + "/entry";
         if ($scope.entries.length > 0) {
             var last_entry_id = $scope.entries[$scope.entries.length - 1].id;
             endpoint += "?after=" + last_entry_id;
@@ -87,9 +87,17 @@ function MyController($scope, $http) {
 
     }
 
-    $scope.load_subscriptions = function() {
-        $http.get("test_api/subscriptions.json").success(function (data, status) {
-            $scope.feeds = data;
+    $scope.list_to_index = function(list, key) {
+        index = {};
+        for (var i = 0; i < list.length; i++) {
+            index[list[i][key]] = list[i];
+        }
+        return index
+    }
+
+    $scope.load_feeds = function() {
+        $http.get("api/feed").success(function (data, status) {
+            $scope.feeds = $scope.list_to_index(data, "id");
             $scope.select_feed("1");
         });
     }
@@ -98,6 +106,6 @@ function MyController($scope, $http) {
         alert(text);
     }
 
-    $scope.load_subscriptions();
+    $scope.load_feeds();
 }
 

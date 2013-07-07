@@ -18,8 +18,30 @@ class FeedHandler(tornado.web.RequestHandler):
         } for feed in feeds]
         self.write(json.dumps(res))
 
+class EntryHandler(tornado.web.RequestHandler):
+    def get(self, feed_id):
+        feed_id = int(feed_id)
+        # TODO: this is test data
+        self.write(json.dumps([
+                {
+                    "id": 1,
+                    "feed_id": feed_id,
+                    "title": "This is a test",
+                    "content": "This is the content of the post.",
+                    "read": True
+                },
+                {
+                    "id": 2,
+                    "feed_id": feed_id,
+                    "title": "Foo bar baz",
+                    "content": "This is the content of the second post.",
+                    "read": False
+                }
+        ]))
+
 application = tornado.web.Application([
     (r"/api/feed/?", FeedHandler),
+    (r"/api/feed/(?P<feed_id>[0-9]+)/entry/?", EntryHandler),
 ])
 
 if __name__ == "__main__":
