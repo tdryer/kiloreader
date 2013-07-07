@@ -14,9 +14,13 @@ body {
     top: 0px;
 }
 #sidebar {
-    float: left;
     width: 236px;
     padding-top: 16px;
+    /* use scroll box for overflow */
+    overflow-y: auto;
+    position: absolute;
+    bottom: 0px;
+    top: 60px;
 }
 
 /* feed list --------------------------------------------------------- */
@@ -42,6 +46,11 @@ ul.feed-list div.feed-item-main {
     padding: 2px;
     padding-left: 16px;
     border-left: 3px solid #ffffff;
+    /* restrict item to single line and add ellipsis */
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    width: 80%;
 }
 
 ul.feed-list div.feed-item-selected-true {
