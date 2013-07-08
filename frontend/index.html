@@ -31,9 +31,9 @@
             <a href="{{feeds[selected_feed].site_url}}" class="feed-title" target="_blank">{{feeds[selected_feed].title}} &raquo;</a>
             <div class="entry entry-selected-{{$index == selected_entry}}" ng-repeat="entry in entries">
                 <div class="entry-main">
-                    <a class="entry-title" href="">{{entry["title"]}}</a>
+                    <a class="entry-title" href="{{entry.url}}" target="_blank">{{entry.title}}</a>
                     <p class="entry-source">from <a href="" class="entry-source" ng-click="select_feed(entry.feed_id)">{{feeds[entry.feed_id].title}}</a></p>
-                    <p>{{entry["content"]}}</p>
+                    <p ng-bind-html-unsafe="entry.content"></p>
                 </div>
                 <div class="entry-bottom">
                     <input id="keep-unread-{{$index}}" type="checkbox" ng-model="entry.read" ng-checked="entry.read" /><label for="keep-unread-{{$index}}" >Keep unread</label>

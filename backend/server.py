@@ -20,24 +20,23 @@ class FeedHandler(tornado.web.RequestHandler):
 
 class EntryHandler(tornado.web.RequestHandler):
     def get(self, feed_id):
-        feed_id = int(feed_id)
-        # TODO: this is test data
-        self.write(json.dumps([
-                {
-                    "id": 1,
-                    "feed_id": feed_id,
-                    "title": "This is a test",
-                    "content": "This is the content of the post.",
-                    "read": True
-                },
-                {
-                    "id": 2,
-                    "feed_id": feed_id,
-                    "title": "Foo bar baz",
-                    "content": "This is the content of the second post.",
-                    "read": False
-                }
-        ]))
+        entries = store.list_entries(int(feed_id), 10)
+        if entries is None:
+            # TODO: should return json errors?
+            raise tornado.web.HTTPError(404, "Feed does not exist")
+        else:
+            res = [{
+                "feed_id": entry.feed_id,
+                "title": entry.title,
+                "url": entry.url,
+                "author": entry.author,
+                "content": entry.content,
+                "date": entry.date,
+                "is_read": entry.is_read,
+                "guid": entry.guid,
+                "id": entry.id,
+            } for entry in entries]
+            self.write(json.dumps(res))
 
 application = tornado.web.Application([
     (r"/api/feed/?", FeedHandler),

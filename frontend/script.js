@@ -58,6 +58,12 @@ function MyController($scope, $http) {
 
     $scope.selected_feed = -1;
 
+    // whether an error has occurred fetching entries for the selected feed
+    $scope.selected_feed_error = false;
+
+    // whether there are no more entries for the selected feed
+    $scope.selected_feed_done = false;
+
     $scope.selected_entry = -1;
 
     $scope.select_feed = function(feed_id) {
@@ -67,24 +73,35 @@ function MyController($scope, $http) {
             $scope.entries = [];
             // start with no entry selected (only sorta works)
             $scope.selected_entry = -1;
+            $scope.selected_feed_error = false;
+            $scope.selected_feed_done = false;
             $scope.load_entries();
         }
     };
 
     $scope.load_entries = function() {
-        var endpoint = "api/feed/" + $scope.selected_feed + "/entry";
-        if ($scope.entries.length > 0) {
-            var last_entry_id = $scope.entries[$scope.entries.length - 1].id;
-            endpoint += "?after=" + last_entry_id;
+        if ($scope.selected_feed > -1 && !$scope.selected_feed_error && !$scope.selected_feed_done) {
+            var endpoint = "api/feed/" + $scope.selected_feed + "/entry";
+            if ($scope.entries.length > 0) {
+                var last_entry_id = $scope.entries[$scope.entries.length - 1].id;
+                endpoint += "?after=" + last_entry_id;
+            }
+            $http.get(endpoint).
+                success(function (data, status) {
+                    if (data.length === 0) {
+                        console.log("No more entries to load");
+                        $scope.selected_feed_done = true;
+                    }
+                    else {
+                        console.log("Loaded entries");
+                        $scope.entries = $scope.entries.concat(data);
+                    }
+                }).
+                error(function (data, status) {
+                    console.log("Error loading entries: " + status);
+                    $scope.selected_feed_error = true;
+                });
         }
-        $http.get(endpoint).success(function (data, status) {
-            $scope.entries = $scope.entries.concat(data);
-        });
-    }
-
-    $scope.load_more_entries = function() {
-        var last_entry_id = $scope.entries
-
     }
 
     $scope.list_to_index = function(list, key) {
