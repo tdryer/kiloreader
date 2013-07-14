@@ -40,7 +40,23 @@ class DBTest(DBTestCase):
         self.assertEqual(entries[0].author, "Tom")
         self.assertEqual(entries[0].content, "This is a test entry.")
         self.assertEqual(entries[0].date, 0)
+        self.assertEqual(entries[0].is_read, False)
+        #self.assertIsInstance(entries[0].is_read, bool)
         self.assertEqual(entries[0].guid, "test_entry")
+
+    def test_update_entry_read(self):
+        self.store.add_feed("Test", "http://example.com/feed.rss",
+                            "http://example.com/")
+        self.store.add_entry(1, "Test Entry", "http://example.com/test", "Tom",
+                             "This is a test entry.", 0, "test_entry")
+        entries = self.store.list_entries(1, 10)
+        self.assertFalse(entries[0].is_read)
+        self.store.update_entry_read(entries[0].id, True)
+        entries = self.store.list_entries(1, 10)
+        self.assertTrue(entries[0].is_read)
+        self.store.update_entry_read(entries[0].id, False)
+        entries = self.store.list_entries(1, 10)
+        self.assertFalse(entries[0].is_read)
 
     def test_add_two_entries_different_guid(self):
         self.store.add_feed("Test", "http://example.com/feed.rss",

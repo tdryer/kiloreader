@@ -36,7 +36,7 @@
                     <p ng-bind-html-unsafe="entry.content"></p>
                 </div>
                 <div class="entry-bottom">
-                    <input id="keep-unread-{{$index}}" type="checkbox" ng-model="entry.read" ng-checked="entry.read" /><label for="keep-unread-{{$index}}" >Keep unread</label>
+                    <input id="keep-unread-{{$index}}" type="checkbox" ng-model="entry.is_read" ng-checked="!entry.is_read" /><label for="keep-unread-{{$index}}" >Keep unread</label>
                 </div>
             </div>
         </div>

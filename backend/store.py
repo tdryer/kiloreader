@@ -126,4 +126,16 @@ class FeedStore(object):
             WHERE feed_id = ?
         """, (feed_id,)).fetchall()
         # TODO restrict count
+        # TODO is_read is an integer instead of bool
         return [Entry(*tup) for tup in res]
+
+    def update_entry_read(self, entry_id, is_read):
+        """Update the read status of an entry."""
+        # TODO handle entry_id not existing
+        print "setting entry {} to {}".format(entry_id, is_read)
+        res = self._db.execute("""
+            UPDATE entry
+            SET is_read = ?
+            WHERE id = ?
+        """, (is_read, entry_id))
+        self._db.commit()

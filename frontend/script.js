@@ -64,6 +64,7 @@ function MyController($scope, $http) {
     // whether there are no more entries for the selected feed
     $scope.selected_feed_done = false;
 
+    // the list index of the selected entry in the selected feed
     $scope.selected_entry = -1;
 
     $scope.select_feed = function(feed_id) {
@@ -77,6 +78,29 @@ function MyController($scope, $http) {
             $scope.selected_feed_done = false;
             $scope.load_entries();
         }
+    };
+
+    // TODO: let the checkboxes mark read/unread
+
+    // when selected_entry changes, the new entry is marked as read
+    $scope.$watch("selected_entry", function(new_val, old_val) {
+        if (new_val > -1) {
+            $scope.mark_entry_read(new_val);
+        }
+    });
+
+    // mark entry with given ID as read on the server
+    $scope.mark_entry_read = function(entry_index) {
+        $scope.entries[entry_index].is_read = true;
+        var entry_id = $scope.entries[entry_index].id;
+        var endpoint = "api/entries/" + entry_id;
+        $http.put(endpoint, {"is_read": true}).
+            success(function (data, status) {
+                console.log("successfully marked entry " + entry_id + " as read");
+            }).
+            error(function (data, status) {
+                console.log("failed to mark entry " + entry_id + " as read: " + status);
+            });
     };
 
     $scope.load_entries = function() {
