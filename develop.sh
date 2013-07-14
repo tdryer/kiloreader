@@ -4,10 +4,10 @@ FRONTEND_PORT=8080
 BACKEND_PORT=8081
 DB_FILE=test.db
 
-echo "starting backend server on $FRONTEND_PORT ..."
+echo "starting backend server on $BACKEND_PORT ..."
 python backend/server.py $DB_FILE $BACKEND_PORT &
 
-echo "starting frontend server on $BACKEND_PORT ..."
+echo "starting frontend server on $FRONTEND_PORT ..."
 tape --root frontend \
      --proxy /api=http://localhost:$BACKEND_PORT/api \
      --port $FRONTEND_PORT &
