@@ -5,10 +5,10 @@ BACKEND_PORT=8081
 DB_FILE=test.db
 
 echo "starting backend server on $BACKEND_PORT ..."
-python backend/server.py $DB_FILE $BACKEND_PORT &
+python -m kiloreader.main $DB_FILE $BACKEND_PORT &
 
 echo "starting frontend server on $FRONTEND_PORT ..."
-tape --root frontend \
+tape --root kiloreader/public \
      --proxy /api=http://localhost:$BACKEND_PORT/api \
      --port $FRONTEND_PORT &
 
